@@ -7,10 +7,16 @@ type UsecaseManager interface {
 	CustomerUsecase() usecase.CustomerUseCase
 	MerchantUsecase() usecase.MerchantUseCase
 	TransactionUsecase() usecase.TransactionUseCase
+	AuthUsecase() usecase.AuthUseCase
 }
 
 type usecaseManager struct {
 	repo RepoManager
+}
+
+// AuthUsecase implements UsecaseManager.
+func (u *usecaseManager) AuthUsecase() usecase.AuthUseCase {
+	return usecase.NewAuthUseCase(u.CustomerUsecase())
 }
 
 // BankUsecase implements UsecaseManager.

@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"mnc/delivery/middleware"
 	"mnc/model"
 	"mnc/usecase"
 	"mnc/utils/common"
@@ -76,8 +77,8 @@ func NewTransactionController(usecase usecase.TransactionUseCase, r *gin.Engine)
 		txUC:   usecase,
 	}
 	rg := r.Group("/api")
-	rg.POST("/transaction", controller.createHandler)
-	rg.GET("/transaction", controller.listHandler)
-	rg.GET("/transaction/:id", controller.getHandler)
+	rg.POST("/transaction", middleware.AuthMiddleware(), controller.createHandler)
+	rg.GET("/transaction", middleware.AuthMiddleware(), controller.listHandler)
+	rg.GET("/transaction/:id", middleware.AuthMiddleware(), controller.getHandler)
 	return &controller
 }

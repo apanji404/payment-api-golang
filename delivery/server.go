@@ -29,7 +29,7 @@ func (s *Server) Run() {
 
 func (s *Server) initController() {
 	s.engine.Use(middleware.LogRequestMiddleware(s.log))
-	// semua controller disini
+	controller.NewAuthController(s.useCaseManager.AuthUsecase(), s.engine)
 	controller.NewBankController(s.useCaseManager.BankUsecase(), s.engine)
 	controller.NewCustomerController(s.useCaseManager.CustomerUsecase(), s.engine)
 	controller.NewMerchantController(s.useCaseManager.MerchantUsecase(), s.engine)
