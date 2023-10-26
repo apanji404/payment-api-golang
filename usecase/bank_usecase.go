@@ -43,6 +43,10 @@ func (b *bankUseCase) FindByBankId(id string) (model.Bank, error) {
 }
 
 func (b *bankUseCase) UpdateBank(payload model.Bank) error {
+	if payload.ID == "" {
+		return fmt.Errorf("bank id is required")
+	}
+
 	if payload.Bank_Name == "" {
 		return fmt.Errorf("bank name is required")
 	}

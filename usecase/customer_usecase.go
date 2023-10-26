@@ -51,6 +51,10 @@ func (b *customerUseCase) FindByCustomerId(id string) (model.Customer, error) {
 }
 
 func (b *customerUseCase) UpdateCustomer(payload model.Customer) error {
+	if payload.ID == "" {
+		return fmt.Errorf("customer id is required")
+	}
+
 	if payload.Username == "" {
 		return fmt.Errorf("customer name is required")
 	}

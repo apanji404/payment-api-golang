@@ -3,7 +3,7 @@ package model
 type Customer struct {
 	ID       string `json:"id"`
 	Username string `json:"username"`
-	Password string `json:"password"`
+	Password string `json:"-"`
 	Name     string `json:"name"`
 	Email    string `json:"email"`
 	Telp     string `json:"telp"`

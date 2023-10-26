@@ -43,6 +43,10 @@ func (m *merchantUseCase) FindByMerchantId(id string) (model.Merchant, error) {
 }
 
 func (m *merchantUseCase) UpdateMerchant(payload model.Merchant) error {
+	if payload.ID == "" {
+		return fmt.Errorf("merchant id is required")
+	}
+
 	if payload.Merchant_Name == "" {
 		return fmt.Errorf("merchant name is required")
 	}
