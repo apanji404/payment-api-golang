@@ -27,19 +27,26 @@ func (p *transactionRepository) Create(payload model.Transaction) error {
 
 func (p *transactionRepository) List() ([]model.Transaction, error) {
 	var transactions []model.Transaction
-	result := p.db.Find(&transactions)
-	if result.Error != nil {
-		return nil, result.Error
+	err := p.db.Preload("Customer").Preload("Merchant").Preload("Bank").
+		Find(&transactions).Error
+	if err != nil {
+		return nil, err
 	}
 
-	fmt.Println("Transaction retrieve all successfully")
+	fmt.Println("Transactions retrieved successfully")
 	return transactions, nil
 }
 
 func (p *transactionRepository) Get(id string) (model.Transaction, error) {
 	var transactions model.Transaction
-	err := p.db.Where("id = ?", id).First(&transactions).Error
-	return transactions, err
+	err := p.db.Preload("Customer").Preload("Merchant").Preload("Bank").
+		Where("id = ?", id).
+		First(&transactions).Error
+	if err != nil {
+		return model.Transaction{}, err
+	}
+
+	return transactions, nil
 }
 
 func (p *transactionRepository) Update(payload model.Transaction) error {
