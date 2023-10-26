@@ -53,12 +53,10 @@ func (m *merchantRepository) Update(payload model.Merchant) error {
 }
 
 func (m *merchantRepository) Delete(id string) error {
-	result := m.db.Delete(&model.Merchant{}, id)
-	if result.Error != nil {
-		return result.Error
-	}
-	fmt.Println("Merchant successfully Deleted")
-	return nil
+	merchant := model.Merchant{}
+	err := m.db.Where("id = ?", id).Delete(&merchant).Error
+	fmt.Println("Successfully Delete Merchant")
+	return err
 }
 
 func (m *merchantRepository) GetByName(name string) (model.Merchant, error) {

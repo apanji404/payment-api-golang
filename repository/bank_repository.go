@@ -53,12 +53,10 @@ func (b *bankRepository) Update(payload model.Bank) error {
 }
 
 func (b *bankRepository) Delete(id string) error {
-	result := b.db.Delete(&model.Bank{}, id)
-	if result.Error != nil {
-		return result.Error
-	}
-	fmt.Println("Bank successfully Deleted")
-	return nil
+	bank := model.Bank{}
+	err := b.db.Where("id = ?", id).Delete(&bank).Error
+	fmt.Println("Successfully Delete Bank")
+	return err
 }
 
 func (p *bankRepository) GetByName(name string) (model.Bank, error) {

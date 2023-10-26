@@ -55,12 +55,10 @@ func (c *customerRepository) Update(payload model.Customer) error {
 }
 
 func (c *customerRepository) Delete(id string) error {
-	result := c.db.Delete(&model.Customer{}, id)
-	if result.Error != nil {
-		return result.Error
-	}
-	fmt.Println("Customer successfully Deleted")
-	return nil
+	customer := model.Customer{}
+	err := c.db.Where("id = ?", id).Delete(&customer).Error
+	fmt.Println("Successfully Delete Customer")
+	return err
 }
 
 func (c *customerRepository) GetByUsername(username string) (model.Customer, error) {

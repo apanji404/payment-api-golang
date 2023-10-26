@@ -79,7 +79,7 @@ func (b *BankController) deleteHandler(c *gin.Context) {
 		c.JSON(500, gin.H{"err": err.Error()})
 		return
 	}
-	c.String(204, "")
+	c.String(204, "Successfully Delete Data")
 }
 
 func NewBankController(usecase usecase.BankUseCase, r *gin.Engine) *BankController {
