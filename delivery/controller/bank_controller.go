@@ -87,10 +87,7 @@ func NewBankController(usecase usecase.BankUseCase, r *gin.Engine) *BankControll
 		router: r,
 		bankUC: usecase,
 	}
-	// daftarkan semua url path disini
-	// /position -> GET, POST, PUT, DELETE
-	rg := r.Group("/api/v1/admin")
-	// path for admin
+	rg := r.Group("/api")
 	rg.POST("/bank", controller.createHandler)
 	rg.GET("/bank", controller.listHandler)
 	rg.GET("/bank/:id", controller.getHandler)

@@ -87,10 +87,7 @@ func NewCustomerController(usecase usecase.CustomerUseCase, r *gin.Engine) *Cust
 		router:     r,
 		customerUC: usecase,
 	}
-	// daftarkan semua url path disini
-	// /position -> GET, POST, PUT, DELETE
-	rg := r.Group("/api/v1/admin")
-	// path for admin
+	rg := r.Group("/api")
 	rg.POST("/customer", controller.createHandler)
 	rg.GET("/customer", controller.listHandler)
 	rg.GET("/customer/:id", controller.getHandler)
