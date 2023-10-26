@@ -39,7 +39,7 @@ func (m *merchantRepository) List() ([]model.Merchant, error) {
 
 func (m *merchantRepository) Get(id string) (model.Merchant, error) {
 	var merchants model.Merchant
-	err := m.db.Where("id = $1", id).First(&merchants).Error
+	err := m.db.Where("id = ?", id).First(&merchants).Error
 	return merchants, err
 }
 

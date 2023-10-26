@@ -39,7 +39,7 @@ func (b *bankRepository) List() ([]model.Bank, error) {
 
 func (b *bankRepository) Get(id string) (model.Bank, error) {
 	var banks model.Bank
-	err := b.db.Where("id = $1", id).First(&banks).Error
+	err := b.db.Where("id = ?", id).First(&banks).Error
 	return banks, err
 }
 

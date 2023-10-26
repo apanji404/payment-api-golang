@@ -38,7 +38,7 @@ func (p *transactionRepository) List() ([]model.Transaction, error) {
 
 func (p *transactionRepository) Get(id string) (model.Transaction, error) {
 	var transactions model.Transaction
-	err := p.db.Where("id = $1", id).First(&transactions).Error
+	err := p.db.Where("id = ?", id).First(&transactions).Error
 	return transactions, err
 }
 

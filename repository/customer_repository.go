@@ -41,7 +41,7 @@ func (c *customerRepository) List() ([]model.Customer, error) {
 
 func (c *customerRepository) Get(id string) (model.Customer, error) {
 	var customers model.Customer
-	err := c.db.Where("id = $1", id).First(&customers).Error
+	err := c.db.Where("id = ?", id).First(&customers).Error
 	return customers, err
 }
 
