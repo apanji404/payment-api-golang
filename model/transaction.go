@@ -2,7 +2,7 @@ package model
 
 import "time"
 
-type Payment struct {
+type Transaction struct {
 	ID             string    `json:"id"`
 	Customer_ID    string    `json:"customer_id"`
 	Merchant_ID    string    `json:"merchant_id"`
@@ -15,6 +15,6 @@ type Payment struct {
 }
 
 // nama tabel yang digunakan sesuai dengan yang ada di skema basis data
-func (Payment) TableName() string {
-	return "payment"
+func (Transaction) TableName() string {
+	return "transaction"
 }
